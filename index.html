@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مترو تهران سه‌بعدی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="panel">
+      <h1>مترو تهران</h1>
+      <div id="legend"></div>
+      <div class="map-controls">
+        <label><input type="checkbox" id="map-toggle" checked> نمایش نقشه</label>
+        <label class="slider">
+          شفافیت نقشه
+          <input type="range" id="map-opacity" min="0" max="1" step="0.05" value="0.6">
+        </label>
+      </div>
+      <p class="hint">چرخش: کلیک چپ · جابه‌جایی: کلیک راست · زوم: اسکرول</p>
+      <p class="credit">© OpenStreetMap contributors</p>
+    </div>
+    <div id="tooltip"></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
