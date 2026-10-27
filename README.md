@@ -6,6 +6,8 @@ Interactive 3D map of the Tehran Metro network, built with Three.js and OpenStre
 
 ![screenshot](screenshot.png)
 
+<p><img src="screenshot-2.png" width="49%" alt="Tehran Metro 3D" /> <img src="screenshot-3.png" width="49%" alt="Tehran Metro 3D" /></p>
+
 ## Features
 
 - All metro lines rendered in 3D, each on its own layer (layer spacing is adjustable)
