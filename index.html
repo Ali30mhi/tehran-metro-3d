@@ -4,24 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>مترو تهران سه‌بعدی</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
   </head>
   <body>
-    <div id="panel">
-      <h1>مترو تهران</h1>
-      <div id="legend"></div>
-      <div class="map-controls">
-        <label><input type="checkbox" id="map-toggle" checked> نمایش نقشه</label>
-        <label class="slider">
-          شفافیت نقشه
-          <input type="range" id="map-opacity" min="0" max="1" step="0.05" value="0.6">
-        </label>
-      </div>
-      <p class="hint">چرخش: کلیک چپ · جابه‌جایی: کلیک راست · زوم: اسکرول</p>
-      <p class="credit">© OpenStreetMap contributors</p>
+    <div id="loader">
+      <div class="spinner"></div>
+      <p>در حال بارگذاری شبکه‌ی مترو…</p>
     </div>
+
+    <aside id="panel" class="glass">
+      <header>
+        <h1>مترو تهران</h1>
+        <button id="panel-toggle" aria-label="جمع یا باز کردن پنل">▴</button>
+      </header>
+
+      <div class="panel-body">
+        <p id="stats" class="stats"></p>
+
+        <div class="search">
+          <input id="search" type="search" placeholder="جستجوی ایستگاه…" autocomplete="off" />
+          <ul id="results"></ul>
+        </div>
+
+        <div id="legend"></div>
+
+        <section class="controls">
+          <label><input id="map-toggle" type="checkbox" checked /> نمایش نقشه</label>
+          <label class="slider">شفافیت نقشه
+            <input id="map-opacity" type="range" min="0" max="1" step="0.05" value="0.6" />
+          </label>
+          <label class="slider">فاصله‌ی لایه‌ها
+            <input id="layer-gap" type="range" min="1" max="30" step="0.5" value="4" />
+          </label>
+          <label class="slider">درخشش
+            <input id="bloom" type="range" min="0" max="2" step="0.05" value="0.8" />
+          </label>
+          <label><input id="trains-toggle" type="checkbox" checked /> قطارهای متحرک</label>
+          <label><input id="rotate-toggle" type="checkbox" checked /> چرخش خودکار</label>
+          <button id="reset-view" class="btn">بازگشت به نمای کلی</button>
+        </section>
+
+        <p class="hint">
+          کلیک روی ایستگاه: جزئیات · چرخش: کلیک چپ · جابجایی: کلیک راست · زوم: اسکرول ·
+          <b>/</b> جستجو · <b>Esc</b> بستن
+        </p>
+        <p class="credit">داده و نقشه: © OpenStreetMap contributors</p>
+      </div>
+    </aside>
+
+    <div id="info" class="glass" hidden>
+      <button id="info-close" aria-label="بستن">×</button>
+      <h2 id="info-name"></h2>
+      <p id="info-en" class="en"></p>
+      <div id="info-lines"></div>
+      <p id="info-meta"></p>
+    </div>
+
     <div id="tooltip"></div>
-    <script type="module" src="./src/main.js"></script>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
