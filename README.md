@@ -30,6 +30,37 @@ The interface is in Persian (RTL).
 | Search | `/` |
 | Close panel | `Esc` |
 
+## Architecture
+
+```mermaid
+flowchart TD
+    subgraph Data["Data pipeline"]
+        OSM[("OpenStreetMap")] -->|Overpass API| F["scripts/fetch-data.mjs"]
+        F --> D["public/data"]
+    end
+
+    subgraph App["Browser app"]
+        H["index.html<br/>panel, search, info box"] --> M["src/main.js"]
+        D --> M
+        T["Map tiles"] --> M
+        U["Mouse / keyboard"] --> M
+        M --> S["Three.js scene<br/>lines, stations, trains"]
+        S --> R["Renderer + bloom"]
+    end
+
+    subgraph Deploy["Build and deploy"]
+        V["vite build"] --> DIST["dist/"]
+        DIST -->|gh-pages| GP["GitHub Pages"]
+    end
+
+    App --> V
+```
+
+- `scripts/fetch-data.mjs` queries the Overpass API for Tehran's metro lines and stations and saves the result to `public/data`. It runs locally, so the live site doesn't depend on Overpass being available.
+- `src/main.js` loads that data, builds the Three.js scene (one layer per line, station markers, animated trains) and handles mouse interaction, search and the control panel.
+- The dark base map is drawn from OSM-based tiles underneath the lines.
+- `npm run deploy` builds the project with Vite and publishes `dist/` to the `gh-pages` branch.
+
 ## Running locally
 
 ```bash
